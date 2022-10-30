@@ -4,14 +4,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class MoodAnalyzerTest {
-     /*//TC1.1: “I am in Sad Mood” message Should Return SAD
+      /*//TC1.1=Given “I am in Sad Mood” message Should Return SAD
     @Test
     public void checkIfMessageShouldReturnSAD() {
         MoodAnalyser moodAnalyser = new MoodAnalyser();
         String result = moodAnalyser.analyseMood("I am in Sad Mood");
         Assert.assertEquals(result,"SAD");
     }
-    //TC1.2: “I am in Any Mood” message Should Return HAPPY
+    //TC1.2 = Given “I am in Any Mood” message Should Return HAPPY
     @Test
     public void checkIfMessageShouldReturnHAPPY() {
         MoodAnalyser moodAnalyser = new MoodAnalyser();
@@ -20,7 +20,7 @@ public class MoodAnalyzerTest {
     }*/
 
 
-    //Repeat TC 1.1: “I am in Sad Mood” message in Constructor Should Return SAD
+    //Repeat TC 1.1 = Given “I am in Sad Mood” message in Constructor Should Return SAD
    /* @Test
     public void checkWhenMessageSADThenShouldReturnSAD() {
         MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Sad Mood");
@@ -35,7 +35,7 @@ public class MoodAnalyzerTest {
         Assert.assertEquals("HAPPY",mood);
     }
     //UC = Handle Exception if User Provides Invalid Mood - Like NULL
-    //TC-2.1: Null Mood Should Return Happy
+    //TC-2.1 = Given Null Mood Should Return Happy
     @Test
     public void giveNUllMoodItShouldReturnHappy() {
         MoodAnalyser moodAnalyser = new MoodAnalyser(null);
@@ -49,14 +49,37 @@ public class MoodAnalyzerTest {
     }
     */
 
-    //TC 3.1: NULL Mood Should Throw MoodAnalysisException
+    /*//TC 3.1 = Given NULL Mood Should Throw MoodAnalysisException
     @Test
     public void giveNullMoodShouldThrowException() {
+        MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+        try {
+            moodAnalyser.analyseMood(null);
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals("Please enter valid Message...",e.getMessage());
+        }
+    }
+     */
+
+    //TC3.2 = Given Empty Mood Should Throw MoodAnalysisException indicating Empty Mood
+    @Test
+    public void giveNullMoodShouldThrowExceptionIndicatingNullMood() {
         MoodAnalyzer moodAnalyser = new MoodAnalyzer(null);
         try {
             moodAnalyser.analyseMood(null);
         } catch (MoodAnalyzeException e) {
-            Assert.assertEquals("Please enter valid Message...",e.getMessage());
+            Assert.assertEquals(MoodAnalyzeException.ExceptionType.ENTER_NULL,e.type);
+        }
+    }
+
+
+    @Test
+    public void giveNullMoodShouldThrowExceptionIndicatingEmptyMood() {
+        MoodAnalyzer moodAnalyser = new MoodAnalyzer(" ");
+        try {
+            moodAnalyser.analyseMood(" ");
+        } catch (MoodAnalyzeException e) {
+            Assert.assertEquals(MoodAnalyzeException.ExceptionType.ENTER_EMPTY,e.type);
         }
     }
 }
